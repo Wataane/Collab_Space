@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DocumentServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">document</a> &gt; <a href="index.source.html" class="el_package">com.example.document.service</a> &gt; <span class="el_source">DocumentServiceImpl.java</span></div><h1>DocumentServiceImpl.java</h1><pre class="source lang-java linenums">package com.example.document.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.example.document.exception.DocumentNotFoundException;
+import com.example.document.model.Document;
+import com.example.document.repository.DocumentRepository;
+
+@Service
+public class DocumentServiceImpl implements DocumentService {
+
+<span class="fc" id="L17">    private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);</span>
+    private final DocumentRepository documentRepository;
+
+<span class="fc" id="L20">    public DocumentServiceImpl(DocumentRepository documentRepository) {</span>
+<span class="fc" id="L21">        this.documentRepository = documentRepository;</span>
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public Document save(Document document) {
+<span class="fc" id="L26">        Document saved = documentRepository.save(document);</span>
+<span class="fc" id="L27">        logger.info(&quot;Saved document with ID: {}&quot;, saved.getId());</span>
+<span class="fc" id="L28">        return saved;</span>
+    }
+
+    @Override
+    public Optional&lt;Document&gt; findById(Long id) {
+<span class="fc" id="L33">        Optional&lt;Document&gt; document = documentRepository.findById(id);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (document.isEmpty()) {</span>
+<span class="fc" id="L35">            logger.warn(&quot;Document not found with ID: {}&quot;, id);</span>
+<span class="fc" id="L36">            throw new DocumentNotFoundException(id);</span>
+        }
+<span class="fc" id="L38">        logger.info(&quot;Fetched document with ID: {}&quot;, id);</span>
+<span class="fc" id="L39">        return document;</span>
+    }
+
+    @Override
+    public List&lt;Document&gt; findAll() {
+<span class="fc" id="L44">        List&lt;Document&gt; documents = documentRepository.findAll();</span>
+<span class="fc" id="L45">        logger.info(&quot;Fetched {} documents from DB&quot;, documents.size());</span>
+<span class="fc" id="L46">        return documents;</span>
+    }
+
+    @Override
+    public void deleteById(Long id) {
+<span class="fc" id="L51">        logger.info(&quot;Deleting document with ID: {}&quot;, id);</span>
+<span class="fc" id="L52">        documentRepository.deleteById(id);</span>
+<span class="fc" id="L53">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

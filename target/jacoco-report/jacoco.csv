@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+document,com.example.document.service,DocumentServiceImpl,0,67,0,2,0,19,0,7,0,6
+document,com.example.document.controller,WelcomeController,2,3,0,0,1,1,1,1,1,1
+document,com.example.document.controller,DocumentController,31,6,0,0,8,3,4,1,4,1
+document,com.example.document,DocumentApplication,5,3,0,0,2,1,1,1,1,1
+document,com.example.document.exception,DocumentNotFoundException,0,5,0,0,0,2,0,1,0,1
+document,com.example.document.exception,GlobalExceptionHandler,56,3,0,0,10,1,2,1,2,1
+document,com.example.document.model,Document,18,25,0,0,5,9,5,5,5,5
